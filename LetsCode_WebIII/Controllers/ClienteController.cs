@@ -7,36 +7,69 @@ namespace LetsCode_WebIII.Controllers
 
     [ApiController]
     [Route("[controller]")]
+    [Consumes("application/json")]
+    [Produces("application/json")]
     public class ClienteController : ControllerBase
     {
 
-        [HttpGet]
-        public List<Cliente> GetInfoCliente()
+        [HttpGet("/Cliente/{cpf}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Cliente> GetInfoCliente(string cpf)
         {
-            return ListaClientes.clienteList;
+            var cliente = ListaClientes.clienteList.Find(c => c.Cpf == cpf);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+            return Ok(cliente);
         }
 
+        [HttpGet("/Clientes")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<List<Cliente>> GetAllClients()
+        {
+            return Ok(ListaClientes.clienteList);
+        }
+
+
         [HttpPost]
-        public Cliente PostCliente(Cliente cliente)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Cliente> PostCliente(Cliente cliente)
         {
             ListaClientes.clienteList.Add(cliente);
-            return cliente;
+            return CreatedAtAction(nameof(PostCliente), cliente);
         }
 
         [HttpPut]
-        public Cliente UpdateCliente(Cliente clienteAtualizado)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult UpdateCliente(Cliente clienteAtualizado)
         {
-            ListaClientes.clienteList.RemoveAll(c => c.Cpf == clienteAtualizado.Cpf);
+            var clienteRemovido = ListaClientes.clienteList.RemoveAll(c => c.Cpf == clienteAtualizado.Cpf);
+            if (clienteRemovido == 0)
+            {
+                return NotFound();
+            }
             ListaClientes.clienteList.Add(clienteAtualizado);
-            return clienteAtualizado;
+            return NoContent();
         }
 
         [HttpDelete]
-        public List<Cliente> DeleteCliente(string cpf)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<List<Cliente>> DeleteCliente(string cpf)
         {
-            ListaClientes.clienteList.RemoveAll(c => c.Cpf == cpf);
-            return ListaClientes.clienteList;
+            var clienteRemovido = ListaClientes.clienteList.RemoveAll(c => c.Cpf == cpf);
+            if (clienteRemovido == 0)
+            {
+                return NotFound();
+            }
+            return Ok(ListaClientes.clienteList);
         }
-
     }
 }

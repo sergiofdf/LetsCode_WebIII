@@ -1,11 +1,17 @@
-﻿namespace LetsCode_WebIII
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LetsCode_WebIII
 {
     public class Cliente
     {
+        [Required(ErrorMessage = "Cpf é obrigatório.")]
+        [MaxLength(11)]
         public string Cpf { get; set; }
+        [Required]
         public string Nome { get; set; }
+        [Required(ErrorMessage = "Nome é obrigatório.")]
         public DateTime DataNascimento { get; set; }
-        public int Idade { get; set; }
+        public int Idade { get; private set; }
 
         public Cliente(string cpf, string nome, DateTime dataNascimento)
         {
