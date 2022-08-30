@@ -16,7 +16,14 @@ Construa um cadastro completo (CRUD) de clientes. Neste cadastro, o cliente deve
 - Desenvolvimento de uma API com "ASP.NET Core Web App (Model-View-Controller)";
 - Aplicação de métodos do protocolo HTTP para criar um CRUD;
 - REST API;
-- Open API.
+- Open API;
+- ApiController;
+- Decorators;
+- Passagem por rota, query e body;
+- Data annotations para validações de dados;
+- Produces e consumes;
+- Definição de códigos e mensagens de retorno;
+- Action Result.
 
 --- 
 ## 🚀 Como executar o programa
