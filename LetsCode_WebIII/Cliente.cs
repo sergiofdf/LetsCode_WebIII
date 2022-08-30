@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LetsCode_WebIII.Utils;
+using System.ComponentModel.DataAnnotations;
 
 namespace LetsCode_WebIII
 {
     public class Cliente
     {
         [Required(ErrorMessage = "Cpf é obrigatório.")]
-        [MaxLength(11)]
+        [CustomValidationCpf(ErrorMessage = "CPF inválido")]
         public string Cpf { get; set; }
         [Required]
         public string Nome { get; set; }
