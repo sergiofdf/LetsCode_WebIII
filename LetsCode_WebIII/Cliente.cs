@@ -8,9 +8,12 @@ namespace LetsCode_WebIII
         [Required(ErrorMessage = "Cpf é obrigatório.")]
         [CustomValidationCpf(ErrorMessage = "CPF inválido")]
         public string Cpf { get; set; }
-        [Required]
-        public string Nome { get; set; }
+
         [Required(ErrorMessage = "Nome é obrigatório.")]
+        public string Nome { get; set; }
+
+        [Required(ErrorMessage = "Informe uma data.")]
+        [CustomValidationData(ErrorMessage = "Informe uma data válida.")]
         public DateTime DataNascimento { get; set; }
         public int Idade { get; private set; }
 
