@@ -23,7 +23,9 @@ Construa um cadastro completo (CRUD) de clientes. Neste cadastro, o cliente deve
 - Data annotations para validações de dados;
 - Produces e consumes;
 - Definição de códigos e mensagens de retorno;
-- Action Result.
+- Action Result;
+- Conexão com banco SQL utilizando Dapper;
+- Boas práticas de segurança (proteção de connection strings, uso de dynamic parameters, etc).
 
 --- 
 ## 🚀 Como executar o programa

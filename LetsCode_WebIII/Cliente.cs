@@ -5,6 +5,8 @@ namespace LetsCode_WebIII
 {
     public class Cliente
     {
+        public long Id { get; set; }
+
         [Required(ErrorMessage = "Cpf é obrigatório.")]
         [CustomValidationCpf(ErrorMessage = "CPF inválido")]
         public string Cpf { get; set; }
@@ -17,12 +19,13 @@ namespace LetsCode_WebIII
         public DateTime DataNascimento { get; set; }
         public int Idade { get; private set; }
 
-        public Cliente(string cpf, string nome, DateTime dataNascimento)
+        public Cliente(long id, string cpf, string nome, DateTime dataNascimento, int idade = 0)
         {
+            Id = id;
             Cpf = cpf;
             Nome = nome;
             DataNascimento = dataNascimento;
-            Idade = ObterIdade();
+            Idade = idade == 0 ? ObterIdade() : idade;
         }
 
         public int ObterIdade()
