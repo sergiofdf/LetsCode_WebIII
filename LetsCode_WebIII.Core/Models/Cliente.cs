@@ -1,7 +1,7 @@
 ﻿using LetsCode_WebIII.Utils;
 using System.ComponentModel.DataAnnotations;
 
-namespace LetsCode_WebIII
+namespace LetsCode_WebIII.Core.Models
 {
     public class Cliente
     {

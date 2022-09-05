@@ -1,9 +1,12 @@
 ﻿using Dapper;
+using LetsCode_WebIII.Core.Interfaces;
+using LetsCode_WebIII.Core.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
-namespace LetsCode_WebIII.Repository
+namespace LetsCode_WebIII.Infra.Data.Repository
 {
-    public class ClienteRepository
+    public class ClienteRepository : IClienteRepository
     {
         private readonly IConfiguration _configuration;
 

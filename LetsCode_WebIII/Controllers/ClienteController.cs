@@ -1,22 +1,21 @@
-﻿using LetsCode_WebIII.Repository;
+﻿using LetsCode_WebIII.Core.Interfaces;
+using LetsCode_WebIII.Core.Models;
 using LetsCode_WebIII.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LetsCode_WebIII.Controllers
 {
-
-
     [ApiController]
     [Route("[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
     public class ClienteController : ControllerBase
     {
-        private readonly ClienteRepository _repositoryCliente;
+        private readonly IClienteService _clienteService;
 
-        public ClienteController(IConfiguration configuration)
+        public ClienteController(IClienteService clienteService)
         {
-            _repositoryCliente = new ClienteRepository(configuration);
+            _clienteService = clienteService;
         }
 
         [HttpGet("/Cliente/{cpf}")]
@@ -30,7 +29,7 @@ namespace LetsCode_WebIII.Controllers
             {
                 return BadRequest("Cpf inválido!");
             }
-            var cliente = _repositoryCliente.GetCliente(cpf);
+            var cliente = _clienteService.GetCliente(cpf);
             if (cliente == null)
             {
                 return NotFound();
@@ -42,7 +41,7 @@ namespace LetsCode_WebIII.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<List<Cliente>> GetAllClients()
         {
-            return Ok(_repositoryCliente.GetClientes());
+            return Ok(_clienteService.GetClientes());
         }
 
 
@@ -51,12 +50,12 @@ namespace LetsCode_WebIII.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Cliente> PostCliente(Cliente cliente)
         {
-            bool cpfCadastrado = CpfJaCadastrado(cliente.Cpf);
+            bool cpfCadastrado = _clienteService.CpfJaCadastrado(cliente.Cpf);
             if (cpfCadastrado)
             {
                 return BadRequest("Cpf já cadastrado!");
             }
-            _repositoryCliente.InsertCliente(cliente);
+            _clienteService.InsertCliente(cliente);
             return CreatedAtAction(nameof(PostCliente), cliente);
         }
 
@@ -66,7 +65,7 @@ namespace LetsCode_WebIII.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdateCliente(long id, Cliente clienteAtualizado)
         {
-            if (!_repositoryCliente.UpdateCliente(id, clienteAtualizado))
+            if (!_clienteService.UpdateCliente(id, clienteAtualizado))
             {
                 return NotFound();
             }
@@ -79,17 +78,11 @@ namespace LetsCode_WebIII.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<Cliente>> DeleteCliente(long id)
         {
-            if (!_repositoryCliente.DeleteCliente(id))
+            if (!_clienteService.DeleteCliente(id))
             {
                 return NotFound();
             }
             return NoContent();
-        }
-
-
-        public bool CpfJaCadastrado(string cpf)
-        {
-            return _repositoryCliente.GetCliente(cpf) != null;
         }
     }
 }

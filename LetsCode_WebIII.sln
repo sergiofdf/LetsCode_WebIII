@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsCode_WebIII", "LetsCode_WebIII\LetsCode_WebIII.csproj", "{C1545B9D-3066-4028-8ADA-46972B96EB62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LetsCode_WebIII", "LetsCode_WebIII\LetsCode_WebIII.csproj", "{C1545B9D-3066-4028-8ADA-46972B96EB62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsCode_WebIII.Core", "LetsCode_WebIII.Core\LetsCode_WebIII.Core.csproj", "{A3563263-A775-4DEC-9800-B2FF1A488BE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsCode_WebIII.Infra.Data", "LetsCode_WebIII.Infra.Data\LetsCode_WebIII.Infra.Data.csproj", "{8EA8D324-4A5C-452D-B845-A4DF18266498}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{C1545B9D-3066-4028-8ADA-46972B96EB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1545B9D-3066-4028-8ADA-46972B96EB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1545B9D-3066-4028-8ADA-46972B96EB62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3563263-A775-4DEC-9800-B2FF1A488BE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3563263-A775-4DEC-9800-B2FF1A488BE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3563263-A775-4DEC-9800-B2FF1A488BE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3563263-A775-4DEC-9800-B2FF1A488BE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA8D324-4A5C-452D-B845-A4DF18266498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA8D324-4A5C-452D-B845-A4DF18266498}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA8D324-4A5C-452D-B845-A4DF18266498}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA8D324-4A5C-452D-B845-A4DF18266498}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
