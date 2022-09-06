@@ -1,5 +1,6 @@
 using LetsCode_WebIII.Core.Interfaces;
 using LetsCode_WebIII.Core.Services;
+using LetsCode_WebIII.Filters;
 using LetsCode_WebIII.Infra.Data.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +12,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add<GeneralExceptionFilter>();
+}
+);
+
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<GaranteCpfNaoFoiCadastradoActionFilter>();
+builder.Services.AddScoped<ValidaUpdateActionFilter>();
 
 var app = builder.Build();
 

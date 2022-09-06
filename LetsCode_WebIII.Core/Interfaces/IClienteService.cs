@@ -6,6 +6,7 @@ namespace LetsCode_WebIII.Core.Interfaces
     {
         List<Cliente> GetClientes();
         Cliente GetCliente(string cpf);
+        Cliente GetCliente(long id);
         bool InsertCliente(Cliente cliente);
         bool UpdateCliente(long id, Cliente cliente);
         bool DeleteCliente(long id);

@@ -36,6 +36,18 @@ namespace LetsCode_WebIII.Infra.Data.Repository
             return conn.QueryFirstOrDefault<Cliente>(query, parameters);
         }
 
+        public Cliente GetCliente(long id)
+        {
+            var query = "SELECT * FROM base854.dbo.clientes WHERE id=@id";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("id", id);
+
+            using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+
+            return conn.QueryFirstOrDefault<Cliente>(query, parameters);
+        }
+
         public bool InsertCliente(Cliente cliente)
         {
             var query = "INSERT INTO base854.dbo.clientes VALUES(@cpf, @nome, @dataNascimento, @idade)";

@@ -1,6 +1,6 @@
 ﻿using LetsCode_WebIII.Core.Interfaces;
 using LetsCode_WebIII.Core.Models;
-using LetsCode_WebIII.Utils;
+using LetsCode_WebIII.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LetsCode_WebIII.Controllers
@@ -9,6 +9,7 @@ namespace LetsCode_WebIII.Controllers
     [Route("[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
+    [TypeFilter(typeof(LogTempoExecucaoResourceFilter))]
     public class ClienteController : ControllerBase
     {
         private readonly IClienteService _clienteService;
@@ -22,13 +23,9 @@ namespace LetsCode_WebIII.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [TypeFilter(typeof(VerificaCpfValidoActionFilter))]
         public ActionResult<Cliente> GetInfoCliente(string cpf)
         {
-            bool cpfValido = ValidaCpf.IsCpfValid(cpf);
-            if (!cpfValido)
-            {
-                return BadRequest("Cpf inválido!");
-            }
             var cliente = _clienteService.GetCliente(cpf);
             if (cliente == null)
             {
@@ -48,13 +45,10 @@ namespace LetsCode_WebIII.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [TypeFilter(typeof(VerificaCpfValidoActionFilter))]
+        [ServiceFilter(typeof(GaranteCpfNaoFoiCadastradoActionFilter))]
         public ActionResult<Cliente> PostCliente(Cliente cliente)
         {
-            bool cpfCadastrado = _clienteService.CpfJaCadastrado(cliente.Cpf);
-            if (cpfCadastrado)
-            {
-                return BadRequest("Cpf já cadastrado!");
-            }
             _clienteService.InsertCliente(cliente);
             return CreatedAtAction(nameof(PostCliente), cliente);
         }
@@ -62,13 +56,11 @@ namespace LetsCode_WebIII.Controllers
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult UpdateCliente(long id, Cliente clienteAtualizado)
+        [TypeFilter(typeof(VerificaCpfValidoActionFilter))]
+        [ServiceFilter(typeof(ValidaUpdateActionFilter))]
+        public IActionResult UpdateCliente(long id, Cliente cliente)
         {
-            if (!_clienteService.UpdateCliente(id, clienteAtualizado))
-            {
-                return NotFound();
-            }
+            _clienteService.UpdateCliente(id, cliente);
             return NoContent();
         }
 

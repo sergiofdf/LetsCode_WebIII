@@ -8,7 +8,6 @@ namespace LetsCode_WebIII.Core.Models
         public long Id { get; set; }
 
         [Required(ErrorMessage = "Cpf é obrigatório.")]
-        [CustomValidationCpf(ErrorMessage = "CPF inválido")]
         public string Cpf { get; set; }
 
         [Required(ErrorMessage = "Nome é obrigatório.")]
