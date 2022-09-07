@@ -25,7 +25,8 @@ Construa um cadastro completo (CRUD) de clientes. Neste cadastro, o cliente deve
 - Definição de códigos e mensagens de retorno;
 - Action Result;
 - Conexão com banco SQL utilizando Dapper;
-- Boas práticas de segurança (proteção de connection strings, uso de dynamic parameters, etc).
+- Boas práticas de segurança (proteção de connection strings, uso de dynamic parameters, etc);
+- Aplicação de ResourceFilter, ActionFilter e ExceptionFilter.
 
 --- 
 ## 🚀 Como executar o programa
