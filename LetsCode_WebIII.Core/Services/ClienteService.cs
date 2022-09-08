@@ -26,9 +26,11 @@ namespace LetsCode_WebIII.Core.Services
             return _clienteRepository.GetCliente(id);
         }
 
-        public bool InsertCliente(Cliente cliente)
+        public Cliente InsertCliente(Cliente cliente)
         {
-            return _clienteRepository.InsertCliente(cliente);
+            _clienteRepository.InsertCliente(cliente);
+
+            return _clienteRepository.GetCliente(cliente.Cpf);
         }
 
         public bool UpdateCliente(long id, Cliente cliente)

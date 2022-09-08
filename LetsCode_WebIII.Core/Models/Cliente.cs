@@ -18,13 +18,20 @@ namespace LetsCode_WebIII.Core.Models
         public DateTime DataNascimento { get; set; }
         public int Idade { get; private set; }
 
-        public Cliente(long id, string cpf, string nome, DateTime dataNascimento, int idade = 0)
+        public Cliente(long id, string cpf, string nome, DateTime dataNascimento, int idade)
         {
             Id = id;
             Cpf = cpf;
             Nome = nome;
             DataNascimento = dataNascimento;
-            Idade = idade == 0 ? ObterIdade() : idade;
+            Idade = idade;
+        }
+        public Cliente(string cpf, string nome, DateTime dataNascimento, int idade = 0)
+        {
+            Cpf = cpf;
+            Nome = nome;
+            DataNascimento = dataNascimento;
+            Idade = ObterIdade();
         }
 
         public int ObterIdade()

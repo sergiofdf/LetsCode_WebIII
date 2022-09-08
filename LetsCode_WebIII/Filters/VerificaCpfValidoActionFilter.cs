@@ -17,9 +17,14 @@ namespace LetsCode_WebIII.Filters
             {
                 cpf = context.ActionArguments["cpf"].ToString();
             }
+            else if (metodo == "PUT")
+            {
+                ClienteUpdateDTO cliente = (ClienteUpdateDTO)context.ActionArguments["Cliente"];
+                cpf = cliente.Cpf;
+            }
             else
             {
-                Cliente cliente = (Cliente)context.ActionArguments["Cliente"];
+                ClienteDTO cliente = (ClienteDTO)context.ActionArguments["Cliente"];
                 cpf = cliente.Cpf;
             }
 

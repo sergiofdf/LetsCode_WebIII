@@ -1,4 +1,5 @@
-﻿using LetsCode_WebIII.Core.Interfaces;
+﻿using AutoMapper;
+using LetsCode_WebIII.Core.Interfaces;
 using LetsCode_WebIII.Core.Models;
 using LetsCode_WebIII.Filters;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,12 @@ namespace LetsCode_WebIII.Controllers
     public class ClienteController : ControllerBase
     {
         private readonly IClienteService _clienteService;
+        private readonly IMapper _mapper;
 
-        public ClienteController(IClienteService clienteService)
+        public ClienteController(IClienteService clienteService, IMapper mapper)
         {
             _clienteService = clienteService;
+            _mapper = mapper;
         }
 
         [HttpGet("/Cliente/{cpf}")]
@@ -47,10 +50,11 @@ namespace LetsCode_WebIII.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [TypeFilter(typeof(VerificaCpfValidoActionFilter))]
         [ServiceFilter(typeof(GaranteCpfNaoFoiCadastradoActionFilter))]
-        public ActionResult<Cliente> PostCliente(Cliente cliente)
+        public ActionResult<Cliente> PostCliente(ClienteDTO cliente)
         {
-            _clienteService.InsertCliente(cliente);
-            return CreatedAtAction(nameof(PostCliente), cliente);
+            Cliente clienteMapeado = _mapper.Map<Cliente>(cliente);
+            var result = _clienteService.InsertCliente(clienteMapeado);
+            return CreatedAtAction(nameof(PostCliente), result);
         }
 
         [HttpPut]
@@ -58,9 +62,10 @@ namespace LetsCode_WebIII.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [TypeFilter(typeof(VerificaCpfValidoActionFilter))]
         [ServiceFilter(typeof(ValidaUpdateActionFilter))]
-        public IActionResult UpdateCliente(long id, Cliente cliente)
+        public IActionResult UpdateCliente(long id, ClienteUpdateDTO cliente)
         {
-            _clienteService.UpdateCliente(id, cliente);
+            Cliente clienteMapeado = _mapper.Map<Cliente>(cliente);
+            _clienteService.UpdateCliente(id, clienteMapeado);
             return NoContent();
         }
 

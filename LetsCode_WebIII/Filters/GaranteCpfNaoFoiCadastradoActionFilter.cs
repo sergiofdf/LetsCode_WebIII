@@ -15,7 +15,7 @@ namespace LetsCode_WebIII.Filters
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            Cliente cliente = (Cliente)context.ActionArguments["Cliente"];
+            ClienteDTO cliente = (ClienteDTO)context.ActionArguments["Cliente"];
             string cpf = cliente.Cpf;
             var buscaCliente = _clienteService.GetCliente(cpf);
 
