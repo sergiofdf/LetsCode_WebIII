@@ -62,7 +62,7 @@ namespace LetsCode_WebIII.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [TypeFilter(typeof(VerificaCpfValidoActionFilter))]
         [ServiceFilter(typeof(ValidaUpdateActionFilter))]
-        public IActionResult UpdateCliente(long id, ClienteUpdateDTO cliente)
+        public IActionResult UpdateCliente(long id, ClienteDTO cliente)
         {
             Cliente clienteMapeado = _mapper.Map<Cliente>(cliente);
             _clienteService.UpdateCliente(id, clienteMapeado);

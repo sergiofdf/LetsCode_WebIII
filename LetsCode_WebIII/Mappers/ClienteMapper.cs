@@ -8,7 +8,6 @@ namespace LetsCode_WebIII.Mappers
         public ClienteMapper()
         {
             CreateMap<ClienteDTO, Cliente>();
-            CreateMap<ClienteUpdateDTO, Cliente>();
         }
     }
 }
