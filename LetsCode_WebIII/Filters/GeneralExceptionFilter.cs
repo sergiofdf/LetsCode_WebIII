@@ -21,13 +21,17 @@ namespace LetsCode_WebIII.Filters
             switch (context.Exception)
             {
                 case SqlException:
-                    context.HttpContext.Response.StatusCode = StatusCodes.Status503ServiceUnavailable;
-                    problem.Status = 503;
-                    context.Result = new ObjectResult(problem);
+                    context.Result = new ObjectResult(problem)
+                    {
+                        StatusCode = StatusCodes.Status503ServiceUnavailable,
+                    };
+                    //context.HttpContext.Response.StatusCode = StatusCodes.Status503ServiceUnavailable;
+                    //problem.Status = 503;
+                    //context.Result = new ObjectResult(problem);
                     break;
                 case NullReferenceException:
                     context.HttpContext.Response.StatusCode = StatusCodes.Status417ExpectationFailed;
-                    problem.Status = 417;
+                    problem.Status = StatusCodes.Status417ExpectationFailed;
                     problem.Title = "Erro inesperado no sistema";
                     context.Result = new ObjectResult(problem);
                     break;

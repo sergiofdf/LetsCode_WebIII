@@ -17,14 +17,16 @@ namespace LetsCode_WebIII.Core.Models
         [CustomValidationData(ErrorMessage = "Informe uma data válida.")]
         public DateTime DataNascimento { get; set; }
         public int Idade { get; private set; }
+        public string Permissao { get; set; }
 
-        public Cliente(long id, string cpf, string nome, DateTime dataNascimento, int idade)
+        public Cliente(long id, string cpf, string nome, DateTime dataNascimento, int idade, string permissao)
         {
             Id = id;
             Cpf = cpf;
             Nome = nome;
             DataNascimento = dataNascimento;
             Idade = idade;
+            Permissao = permissao;
         }
         public Cliente(string cpf, string nome, DateTime dataNascimento, int idade = 0)
         {

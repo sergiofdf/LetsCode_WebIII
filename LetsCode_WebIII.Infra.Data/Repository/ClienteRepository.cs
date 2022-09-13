@@ -19,9 +19,20 @@ namespace LetsCode_WebIII.Infra.Data.Repository
         {
             var query = "SELECT * FROM base854.dbo.clientes";
 
-            using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+            try
+            {
+                using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
 
-            return conn.Query<Cliente>(query).ToList();
+                return conn.Query<Cliente>(query).ToList();
+
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"\nErro ao comunicar com o banco, \nMensagem: {ex.Message} \nStack Trace: {ex.StackTrace} " +
+                    $"\nTarget Site: {ex.TargetSite}");
+
+                return null;
+            }
         }
 
         public Cliente GetCliente(string cpf)

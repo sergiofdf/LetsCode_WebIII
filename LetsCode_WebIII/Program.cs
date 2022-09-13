@@ -23,6 +23,7 @@ builder.Services.AddMvc(options =>
 
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<GaranteCpfNaoFoiCadastradoActionFilter>();
 builder.Services.AddScoped<ValidaUpdateActionFilter>();
 

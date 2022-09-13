@@ -10,10 +10,8 @@ namespace LetsCode_WebIII.Filters
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            string metodo = context.HttpContext.Request.Method;
             string cpf = "";
-
-            if (metodo == "GET")
+            if (HttpMethods.IsGet(context.HttpContext.Request.Method))
             {
                 cpf = context.ActionArguments["cpf"].ToString();
             }
