@@ -1,10 +1,12 @@
 ﻿using LetsCode_WebIII.Core.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LetsCode_WebIII.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableCors("PolicyCors")]
     public class TokenController : ControllerBase
     {
         private readonly IClienteService _clienteService;

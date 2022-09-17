@@ -8,6 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PolicyCors",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7179")
+                   .WithOrigins("http://127.0.0.1:5173")
+                   .WithOrigins("https://eventos-botucatu-sergio.netlify.app")
+                  .WithMethods("GET", "POST", "PUT", "DELETE");
+            policy.AllowAnyHeader();
+        });
+});
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -37,6 +51,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("PolicyCors");
 
 app.UseAuthorization();
 

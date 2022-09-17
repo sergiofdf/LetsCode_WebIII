@@ -47,7 +47,8 @@ Construa um cadastro completo (CRUD) de clientes. Neste cadastro, o cliente deve
   "AllowedHosts": "*",
   "ConnectionStrings": {
     "DefaultConnection": "Server=NomeServidor;Database=NomeBancoDeDados; User Id=Usuario; Password=Senha; Encrypt=False"
-  }
+  },
+  "secretKey": "chave para criação de token JWT"
 }
 ```
 

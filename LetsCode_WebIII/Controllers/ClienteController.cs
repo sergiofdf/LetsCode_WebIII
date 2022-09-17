@@ -2,6 +2,7 @@
 using LetsCode_WebIII.Core.Interfaces;
 using LetsCode_WebIII.Core.Models;
 using LetsCode_WebIII.Filters;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LetsCode_WebIII.Controllers
@@ -10,6 +11,7 @@ namespace LetsCode_WebIII.Controllers
     [Route("[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
+    [EnableCors("PolicyCors")]
     [TypeFilter(typeof(LogTempoExecucaoResourceFilter))]
     public class ClienteController : ControllerBase
     {
